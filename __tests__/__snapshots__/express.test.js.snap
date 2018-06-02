@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main should return readme when existed 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+  <meta charset=\\"UTF-8\\">
+  <title>Readme</title>
+  <link rel=\\"stylesheet\\" href=\\"//unpkg.com/github-markdown-css\\">
+</head>
+<body>
+<div class=\\"markdown-body\\">
+  <p>??
+// haha</p>
+</div>
+</body>
+</html>
+"
+`;
+
+exports[`main should static works when path not found, but has 404.html 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+    <meta charset=\\"UTF-8\\">
+    <title>404</title>
+</head>
+<body>
+
+</body>
+</html>
+"
+`;
