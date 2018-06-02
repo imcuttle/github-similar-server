@@ -31,7 +31,7 @@ debug('opt', opt)
     -h, --help             Show help
     -v, --version          Show version
     -p, --port             Set server's port                   [default 8080]
-    --silent               Do not log anything                 [default 8080]
+    --silent               Do not log anything                 [default false]
     --disable-markdown     Disable markdown render
     --disable-static       Disable static file service
     --markdown-template    The template of markdown's template
