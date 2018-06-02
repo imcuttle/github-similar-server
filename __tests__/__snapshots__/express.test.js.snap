@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`main should return readme when existed 1`] = `"Found. Redirecting to /readme/"`;
+exports[`main should return 302 when directory matched 1`] = `"Found. Redirecting to /readme/"`;
 
 exports[`main should static works when path not found, but has 404.html 1`] = `
 "<!DOCTYPE html>

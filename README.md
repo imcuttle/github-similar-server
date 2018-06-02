@@ -48,6 +48,14 @@ gss({
 
 And extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options
 
+## About markdownTemplate
+
+Use [Lodash.template](https://lodash.com/docs/4.17.10#template) with template data: 
+
+- title
+- markdownHTML
+- filename
+
 ## License
 
 MIT
