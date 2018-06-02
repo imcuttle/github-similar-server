@@ -57,10 +57,11 @@ function markdown(options = {}) {
     const filename = nps.join(root, url)
     debug('filename', filename)
 
-    if (fs.isFile(filename)) {
-      if (['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())) {
-        renderMarkdown(res, filename, next, options)
-      }
+    if (
+      fs.isFile(filename) &&
+      ['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())
+    ) {
+      renderMarkdown(res, filename, next, options)
     } else if (
       fs.isDirectory(filename) &&
       !fs.isFile(nps.join(filename, 'index.html'))
