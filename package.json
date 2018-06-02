@@ -27,6 +27,7 @@
     "minimist": "^1.2.0",
     "morgan": "^1.9.0",
     "pify": "^3.0.0",
+    "rehype-parse": "^4.1.0",
     "rehype-raw": "^2.0.0",
     "rehype-stringify": "^3.0.0",
     "remark": "^9.0.0",
@@ -36,6 +37,7 @@
     "remark-rehype": "^3.0.0",
     "remark-slug": "^4.2.3",
     "to-vfile": "^4.0.0",
+    "unified": "^7.0.0",
     "vfile-reporter": "^5.0.0"
   },
   "jest": {
