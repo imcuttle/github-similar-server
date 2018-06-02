@@ -8,6 +8,7 @@
 const express = require('express')
 const ecstatic = require('ecstatic')
 const nps = require('path')
+const nrl = require('url')
 const pify = require('pify')
 const template = require('lodash.template')
 const debug = require('debug')('github-similar-server:express')
@@ -64,8 +65,15 @@ function markdown(options = {}) {
       renderMarkdown(res, filename, next, options)
     } else if (
       fs.isDirectory(filename) &&
-      !fs.isFile(nps.join(filename, 'index.html'))
+      !fs.isFile(nps.join(filename, 'index.html')) &&
+      !fs.isFile(filename + '.html')
     ) {
+      let obj = nrl.parse(url)
+      if (!obj.pathname.endsWith('/')) {
+        obj.pathname = obj.pathname + '/'
+        return res.redirect(nrl.format(obj))
+      }
+
       let founded = ['Readme.md', 'readme.md', 'README.md', 'index.md']
         .map(name => nps.join(filename, name))
         .some(filename => {

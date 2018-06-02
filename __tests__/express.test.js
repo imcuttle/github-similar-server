@@ -39,13 +39,13 @@ describe('main', function() {
       .end(done)
   })
 
-  it('should return readme when existed', function(done) {
+  it('should return 302 when directory matched', function(done) {
     request(app)
       .get('/case-readme/readme')
       .expect(function(res) {
         expect(res.text).toMatchSnapshot()
       })
-      .expect(200)
+      .expect(302)
       .end(done)
   })
 

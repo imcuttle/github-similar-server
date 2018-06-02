@@ -1,47 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`main should return readme when existed 1`] = `
-"<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-  <meta charset=\\"UTF-8\\">
-  <title>Readme</title>
-  <link rel=\\"stylesheet\\" href=\\"//unpkg.com/github-markdown-css\\">
-  <link rel=\\"stylesheet\\" href=\\"//unpkg.com/highlight.js/styles/github.css\\">
-  <style>
-    .markdown-body {
-      max-width: 65%;
-      margin: 40px auto 30px;
-    }
-    @media screen and (max-width: 1200px) {
-      .markdown-body {
-        max-width: 78%;
-      }
-    }
-
-    @media screen and (max-width: 700px) {
-      .markdown-body {
-        max-width: 90%;
-        margin: 20px auto 10px;
-      }
-    }
-    @media screen and (max-width: 400px) {
-      .markdown-body {
-        max-width: 98%;
-        margin: 20px auto 10px;
-      }
-    }
-  </style>
-</head>
-<body>
-<div class=\\"markdown-body\\">
-  <p>??
-// haha</p>
-</div>
-</body>
-</html>
-"
-`;
+exports[`main should return readme when existed 1`] = `"Found. Redirecting to /readme/"`;
 
 exports[`main should static works when path not found, but has 404.html 1`] = `
 "<!DOCTYPE html>
