@@ -47,3 +47,7 @@ gss({
     markdownTemplate    The template of markdown's template
 
 And extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options
+
+## License
+
+MIT
