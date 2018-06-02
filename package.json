@@ -37,5 +37,10 @@
     "remark-slug": "^4.2.3",
     "to-vfile": "^4.0.0",
     "vfile-reporter": "^5.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__test{s,}__/*.(spec|test).{t,j}s{x,}"
+    ]
   }
 }
