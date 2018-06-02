@@ -5,7 +5,8 @@
   "description": "A github similar static server",
   "author": "imcuttle",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm test"
   },
   "keywords": [
     "github-similar-server"
