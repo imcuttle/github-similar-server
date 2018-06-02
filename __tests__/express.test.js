@@ -8,7 +8,7 @@ const nps = require('path')
 const request = require('supertest')
 
 const { makeFixture } = require('./helper')
-const middleware = require('../src')
+const middleware = require('../src/index')
 
 describe('main', function() {
   const app = express()
