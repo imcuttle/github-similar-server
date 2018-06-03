@@ -27,7 +27,7 @@ const app = require('express')()
 const gss = require('github-similar-server')
 
 // Use as middleware
-app.use('__', gss)
+app.use('__', gss())
 
 // Or create an express server
 gss({
