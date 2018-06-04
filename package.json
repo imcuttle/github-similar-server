@@ -2,7 +2,7 @@
   "name": "github-similar-server",
   "version": "1.0.5",
   "main": "index.js",
-  "description": "A github similar static server",
+  "description": "A github similar static server with a markdown renderer.",
   "author": "imcuttle",
   "scripts": {
     "test": "jest",

@@ -5,7 +5,7 @@
 [![NPM version](https://img.shields.io/npm/v/github-similar-server.svg?style=flat-square)](https://www.npmjs.com/package/github-similar-server)
 [![NPM Downloads](https://img.shields.io/npm/dm/github-similar-server.svg?style=flat-square&maxAge=43200)](https://www.npmjs.com/package/github-similar-server)
 
-A github similar static server
+A github similar static server with a markdown renderer.
 
 ## Usage
 
