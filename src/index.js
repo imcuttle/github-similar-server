@@ -11,7 +11,8 @@ const morgan = require('morgan')
 
 const middleware = require('./express')
 
-function start({ basePath = '/', port, silent, ...options } = {}) {
+function start(options = {}) {
+  const { basePath = '/', port, silent } = options
   debug('start option', arguments[0])
 
   if (!port) {
