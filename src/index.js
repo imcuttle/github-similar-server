@@ -24,10 +24,13 @@ function start(options = {}) {
   app.use(basePath, middleware(options))
 
   return new Promise((resolve, reject) => {
-    app.listen(port, function(err) {
+    let server = app.listen(port, function(err) {
       if (err) reject(err)
       else {
         !silent && console.log('Server run on http://localhost:' + port)
+        app.close = function (callback) {
+          server.close(callback)
+        }
         resolve(app)
       }
     })
