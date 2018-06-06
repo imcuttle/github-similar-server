@@ -16,6 +16,7 @@ describe('main', function() {
   app.use('/case-1', middleware({ root: makeFixture('case-1') }))
   app.use('/case-404', middleware({ root: makeFixture('case-404') }))
   app.use('/case-readme', middleware({ root: makeFixture('case-readme') }))
+  app.use('/case-raw', middleware({ root: makeFixture('case-raw') }))
 
   it('should static works when path not found', function(done) {
     request(app)
@@ -57,5 +58,23 @@ describe('main', function() {
       })
       .expect(200)
       .end(done)
+  })
+
+  it('should responses raw markdown text when `?raw`', function(done) {
+    request(app)
+      .get('/case-raw/README.md?raw=true')
+      .expect(function(res) {
+        expect(res.text).toBe('# raw\n')
+      })
+      .expect(200)
+      .end(function() {
+        request(app)
+          .get('/case-raw/readme/README.md?raw=true')
+          .expect(function(res) {
+            expect(res.text).toBe('## hah\n')
+          })
+          .expect(200)
+          .end(done)
+      })
   })
 })
