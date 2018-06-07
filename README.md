@@ -44,8 +44,8 @@ const gssApp = gss({
 
     port                Set server's port                   [default 8080]
     silent              Do not log anything                 [default false]
-    disableMarkdown     Disable markdown render
-    disableStatic       Disable static file service
+    enableMarkdown      Enable markdown render              [default true]
+    enableStatic        Enable static file service          [default true]
     markdownTemplate    The template of markdown's template
 
 And extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options
