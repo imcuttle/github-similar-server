@@ -17,6 +17,7 @@ describe('main', function() {
   app.use('/case-404', middleware({ root: makeFixture('case-404') }))
   app.use('/case-readme', middleware({ root: makeFixture('case-readme') }))
   app.use('/case-raw', middleware({ root: makeFixture('case-raw') }))
+  app.use('/case-zh', middleware({ root: makeFixture('case-zh') }))
 
   it('should static works when path not found', function(done) {
     request(app)
@@ -77,4 +78,23 @@ describe('main', function() {
           .end(done)
       })
   })
+
+  it('should response html when request path contains chinese', function (done) {
+    request(app)
+      .get(`/case-zh/${encodeURIComponent('你好 呀')}.md`)
+      .expect(function(res) {
+        expect(res.text).toMatchSnapshot()
+      })
+      .expect(200)
+      .end(function() {
+        request(app)
+          .get(`/case-zh/${encodeURIComponent('你好 呀')}.md?raw=true`)
+          .expect(function(res) {
+            expect(res.text).toBe('## haha\n')
+          })
+          .expect(200)
+          .end(done)
+      })
+  })
+
 })

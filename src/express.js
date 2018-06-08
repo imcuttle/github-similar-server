@@ -53,13 +53,13 @@ function markdown(options = {}) {
     debug('req.url', req.url)
     debug('req.originalUrl', req.originalUrl)
     debug('req.baseUrl', req.baseUrl)
-    
+
     if (req.query.raw) {
       // 返回原始数据
       return next()
     }
 
-    const url = req.url
+    const url = decodeURIComponent(req.url)
     const filename = nps.join(root, url)
     debug('filename', filename)
 
