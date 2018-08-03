@@ -21,6 +21,7 @@ module.exports = function(filename) {
     remark()
       .use(require('remark-gemoji-to-emoji'))
       .use(require('remark-slug'))
+      .use(require('remark-frontmatter'))
       .use(require('remark-autolink-headings'), {
         content: unified()
           .use(rehypeParse, { fragment: true })
