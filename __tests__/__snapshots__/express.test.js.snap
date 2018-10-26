@@ -44,8 +44,6 @@ exports[`main should response html when request path contains chinese 1`] = `
 "
 `;
 
-exports[`main should response html when through \`markdownTemplateString\` 1`] = `"你好 呀"`;
-
 exports[`main should return 302 when directory matched 1`] = `"Found. Redirecting to /readme/"`;
 
 exports[`main should static works when path not found, but has 404.html 1`] = `
