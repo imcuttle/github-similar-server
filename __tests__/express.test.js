@@ -82,7 +82,7 @@ describe('main', function() {
       .expect(200)
       .end(function() {
         request(app)
-          .get('/case-raw/readme/README.md?raw=true')
+          .get('/case-raw/readme/?raw=true')
           .expect(function(res) {
             expect(res.text).toBe('## hah\n')
           })
