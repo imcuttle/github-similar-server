@@ -42,7 +42,6 @@ function renderMarkdown(
         })
       )
     })
-    .then()
     .catch(next)
 }
 
@@ -79,7 +78,16 @@ function markdown(options = {}) {
         return res.redirect(nrl.format(obj))
       }
 
-      let founded = ['Readme.md', 'readme.md', 'README.md', 'index.md']
+      let founded = [
+        'Readme.md',
+        'readme.md',
+        'README.md',
+        'README.MD',
+        'readme.markdown',
+        'README.markdown',
+        'README.MARKDOWN',
+        'index.md'
+      ]
         .map(name => nps.join(filename, name))
         .some(filename => {
           if (fs.isFile(filename)) {
