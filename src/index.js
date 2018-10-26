@@ -37,4 +37,6 @@ function start(options = {}) {
   })
 }
 
+Object.assign(start, middleware)
+
 module.exports = start

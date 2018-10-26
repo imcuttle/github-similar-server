@@ -21,10 +21,20 @@ function renderMarkdown(
   res,
   filename,
   next,
-  { markdownTemplate = nps.join(__dirname, 'template.html') } = {}
+  {
+    markdownTemplate = nps.join(__dirname, 'template.html'),
+    markdownTemplateString,
+    templateParameters = {}
+  } = {}
 ) {
   markhtml(filename)
     .then(function({ output }) {
+      if (
+        typeof markdownTemplateString === 'string' &&
+        markdownTemplateString
+      ) {
+        return { output, templateString: markdownTemplateString }
+      }
       return pify(fs.readFile)(markdownTemplate, {
         encoding: 'utf8'
       }).then(templateString => ({
@@ -35,11 +45,11 @@ function renderMarkdown(
     .then(({ templateString, output }) => {
       res.type('html')
       res.send(
-        template(templateString)({
+        template(templateString)(Object.assign({}, templateParameters, {
           filename,
           title: nps.basename(filename, nps.extname(filename)),
           markdownHTML: output
-        })
+        }))
       )
     })
     .catch(next)

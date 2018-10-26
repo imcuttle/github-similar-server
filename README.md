@@ -42,13 +42,60 @@ const gssApp = gss({
 
 ## Options
 
-    port                Set server's port                   [default 8080]
-    silent              Do not log anything                 [default false]
-    enableMarkdown      Enable markdown render              [default true]
-    enableStatic        Enable static file service          [default true]
-    markdownTemplate    The template of markdown's template
+#### `port`
 
-And extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options
+the service port
+
+- Type: `number`
+- Default: `8080`
+
+#### `silent`
+
+Do not log anything
+
+- Type: `boolean`
+- Default: `false`
+
+#### `enableMarkdown`
+
+Enable markdown render
+
+- Type: `boolean`
+- Default: `true`
+
+#### `enableStatic`
+
+Enable static file service
+
+- Type: `boolean`
+- Default: `true`
+
+#### `markdownTemplate`
+
+The path of markdown's template
+
+- Type: `string`
+- Default: [`./src/template.html`](./src/template.html)
+
+#### `markdownTemplateString`
+
+The string source of markdown's template, It has more higher priority. 
+
+- Type: `string`
+
+#### `templateParameters`
+
+Extra parameters of template
+
+- Type: `{}`
+
+
+**Extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options**
+
+#### `cache`
+
+- Type: `string`
+- Default: `'max-age=-1'`
 
 ## Rule
 
@@ -56,7 +103,7 @@ And extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options
 
 2. The service would response index.html when contains index.html and README.md via url `/`.
 
-3. It would response raw markdown text when with querystring `?raw`.
+3. It would response raw markdown text when with query string `?raw`.
 
 ## About markdownTemplate
 

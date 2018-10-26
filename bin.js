@@ -10,6 +10,7 @@ const opt = {
   disableMarkdown: !!argv['disable-markdown'],
   disableStatic: !!argv['disable-static'],
   markdownTemplate: argv['markdown-template'],
+  markdownTemplateString: argv['markdown-template-string'],
   silent: !!argv['silent'],
   root: (argv._ && argv._[0]) || process.cwd()
 }
@@ -28,13 +29,14 @@ debug('opt', opt)
     $ github-similar-server [path] <options>
 
   Options
-    -h, --help             Show help
-    -v, --version          Show version
-    -p, --port             Set server's port                   [default 8080]
-    --silent               Do not log anything                 [default false]
-    --disable-markdown     Disable markdown render
-    --disable-static       Disable static file service
-    --markdown-template    The template of markdown's template
+    -h, --help                    Show help
+    -v, --version                 Show version
+    -p, --port                    Set server's port                   [default 8080]
+    --silent                      Do not log anything                 [default false]
+    --disable-markdown            Disable markdown render
+    --disable-static              Disable static file service
+    --markdown-template           The template of markdown's template
+    --markdown-template-string    The template string source of markdown's template
 `)
     return
   }

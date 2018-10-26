@@ -19,6 +19,18 @@ describe('main', function() {
   app.use('/case-raw', middleware({ root: makeFixture('case-raw') }))
   app.use('/case-zh', middleware({ root: makeFixture('case-zh') }))
 
+  app.use(
+    '/case-template-string',
+    middleware({
+      root: makeFixture('case-zh'),
+      markdownTemplateString: '<%=title%> <%=foo%>',
+      templateParameters: {
+        title: 'abc',
+        foo: 'fooo'
+      }
+    })
+  )
+
   it('should static works when path not found', function(done) {
     request(app)
       .get('/case-1/not_found')
@@ -79,7 +91,7 @@ describe('main', function() {
       })
   })
 
-  it('should response html when request path contains chinese', function (done) {
+  it('should response html when request path contains chinese', function(done) {
     request(app)
       .get(`/case-zh/${encodeURIComponent('你好 呀')}.md`)
       .expect(function(res) {
@@ -97,4 +109,13 @@ describe('main', function() {
       })
   })
 
+  it('should response html when through `markdownTemplateString` and `templateParameters`', function(done) {
+    request(app)
+      .get(`/case-template-string/${encodeURIComponent('你好 呀')}.md`)
+      .expect(function(res) {
+        expect(res.text).toEqual('你好 呀 fooo')
+      })
+      .expect(200)
+      .end(done)
+  })
 })
