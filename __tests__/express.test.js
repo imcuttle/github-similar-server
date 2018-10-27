@@ -65,11 +65,31 @@ describe('main', function() {
 
   it('should skip readme when index.html existed', function(done) {
     request(app)
-      .get('/case-readme')
+      .get('/case-readme/')
       .expect(function(res) {
         expect(res.text).toBe('index\n')
       })
       .expect(200)
+      .end(done)
+  })
+
+  it('should redirect to directory', function(done) {
+    request(app)
+      .get('/case-readme')
+      .expect(302)
+      .end(done)
+  })
+
+  it("should ecstatic's link is correct when has baseUrl", function(done) {
+    request(app)
+      .get('/case-1/')
+      .expect(200)
+      .expect(function(res) {
+        expect(res.text).not.toContain('<a href="/abc/">')
+        expect(res.text).toContain('<a href="/case-1/abc/">')
+        expect(res.text).not.toContain('<a href="/haha.html">')
+        expect(res.text).toContain('<a href="/case-1/haha.html">')
+      })
       .end(done)
   })
 

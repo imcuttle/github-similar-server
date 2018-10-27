@@ -21,18 +21,11 @@ function renderMarkdown(
   res,
   filename,
   next,
-  {
-    markdownTemplate = nps.join(__dirname, 'template.html'),
-    markdownTemplateString,
-    templateParameters = {}
-  } = {}
+  { markdownTemplate = nps.join(__dirname, 'template.html'), markdownTemplateString, templateParameters = {} } = {}
 ) {
   markhtml(filename)
     .then(function({ output }) {
-      if (
-        typeof markdownTemplateString === 'string' &&
-        markdownTemplateString
-      ) {
+      if (typeof markdownTemplateString === 'string' && markdownTemplateString) {
         return { output, templateString: markdownTemplateString }
       }
       return pify(fs.readFile)(markdownTemplate, {
@@ -45,11 +38,13 @@ function renderMarkdown(
     .then(({ templateString, output }) => {
       res.type('html')
       res.send(
-        template(templateString)(Object.assign({}, templateParameters, {
-          filename,
-          title: nps.basename(filename, nps.extname(filename)),
-          markdownHTML: output
-        }))
+        template(templateString)(
+          Object.assign({}, templateParameters, {
+            filename,
+            title: nps.basename(filename, nps.extname(filename)),
+            markdownHTML: output
+          })
+        )
       )
     })
     .catch(next)
@@ -72,10 +67,7 @@ function markdown(options = {}) {
     const filename = nps.join(root, url)
     debug('filename', filename)
 
-    if (
-      fs.isFile(filename) &&
-      ['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())
-    ) {
+    if (fs.isFile(filename) && ['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())) {
       renderMarkdown(res, filename, next, options)
     } else if (
       fs.isDirectory(filename) &&
@@ -122,18 +114,35 @@ const DEFAULT_OPTIONS = {
 }
 function githubSimilar(options = {}) {
   if (typeof options.root !== 'string') {
-    throw new SpecError(
-      'expect `root` is belongs to string, but ' + typeof options.root + '.'
-    )
+    throw new SpecError('expect `root` is belongs to string, but ' + typeof options.root + '.')
   }
 
   options = Object.assign({}, DEFAULT_OPTIONS, options)
   debug('options:', options)
 
-  return [
-    options.enableMarkdown && markdown(options),
-    options.enableStatic && ecstatic(options)
-  ].filter(Boolean)
+  return [options.enableMarkdown && markdown(options), options.enableStatic && wrapStatic(options)].filter(Boolean)
+}
+
+// https://github.com/jfhbrook/node-ecstatic/issues/235
+// Wrap ecstatic to solve it temporarily
+function wrapStatic(opts = {}) {
+  return function(req, res, next) {
+    const baseDir = typeof opts.baseDir === 'string' ? opts.baseDir : req.baseUrl
+    req.url = req.originalUrl || req.url
+
+    let fn = ecstatic(
+      Object.assign({}, opts, {
+        baseDir
+      })
+    )
+
+    if (!Array.isArray(fn)) {
+      fn = [fn]
+    }
+    fn.forEach(handle => {
+      typeof handle === 'function' && handle.apply(this, arguments)
+    })
+  }
 }
 
 githubSimilar.markdown = markdown
