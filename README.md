@@ -90,12 +90,21 @@ Extra parameters of template
 - Type: `{}`
 
 
-**Extends [ecstatic](https://github.com/jfhbrook/node-ecstatic) options**
-
 #### `cache`
 
 - Type: `string`
 - Default: `'max-age=-1'`
+
+#### `baseDir`
+
+`baseDir` is not recommended to be assigned if you don't know what you are doing.
+
+Because it has some troubles in ecstatic. https://github.com/jfhbrook/node-ecstatic/issues/235 
+
+- Type: `string`
+- Default: `req.baseUrl`
+
+**Rest options extend [ecstatic](https://github.com/jfhbrook/node-ecstatic) options**
 
 ## Rule
 
