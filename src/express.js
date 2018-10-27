@@ -146,4 +146,6 @@ function wrapStatic(opts = {}) {
 }
 
 githubSimilar.markdown = markdown
+githubSimilar.static = wrapStatic
+
 module.exports = githubSimilar

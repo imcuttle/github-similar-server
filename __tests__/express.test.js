@@ -138,4 +138,9 @@ describe('main', function() {
       .expect(200)
       .end(done)
   })
+
+  it('should githubSimilar.markdown', function () {
+    expect(middleware.markdown).toBeInstanceOf(Function)
+    expect(middleware.static).toBeInstanceOf(Function)
+  })
 })
