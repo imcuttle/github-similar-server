@@ -49,6 +49,13 @@ the service port
 - Type: `number`
 - Default: `8080`
 
+#### `basePath`
+
+the service's base path
+
+- Type: `string`
+- Default: `'/'`
+
 #### `silent`
 
 Do not log anything
@@ -121,6 +128,10 @@ Use [Lodash.template](https://lodash.com/docs/4.17.10#template) with template da
 * title
 * markdownHTML
 * filename
+
+## Related
+
+- [remark-preset-gfm](https://github.com/imcuttle/remark-preset-gfm) - Remark preset for gfm (GitHub Favorite Markdown)
 
 ## License
 
