@@ -49,6 +49,13 @@ the service port
 - Type: `number`
 - Default: `8080`
 
+#### `basePath`
+
+the service's base path
+
+- Type: `string`
+- Default: `'/'`
+
 #### `silent`
 
 Do not log anything
