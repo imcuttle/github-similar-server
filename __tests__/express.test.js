@@ -113,7 +113,7 @@ describe('main', function() {
 
   it('should response html when request path contains chinese', function(done) {
     request(app)
-      .get(`/case-zh/${encodeURIComponent('你好 呀')}.md`)
+      .get(`/case-zh/${encodeURIComponent('你好 呀')}.md?a=22`)
       .expect(function(res) {
         expect(res.text).toMatchSnapshot()
       })

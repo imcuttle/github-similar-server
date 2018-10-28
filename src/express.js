@@ -63,8 +63,8 @@ function markdown(options = {}) {
       return next()
     }
 
-    const url = decodeURIComponent(req.url)
-    const filename = nps.join(root, url)
+    const url = decodeURIComponent(nrl.parse(req.url).pathname)
+    let filename = nps.join(root, url)
     debug('filename', filename)
 
     if (fs.isFile(filename) && ['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())) {
@@ -74,13 +74,14 @@ function markdown(options = {}) {
       !fs.isFile(nps.join(filename, 'index.html')) &&
       !fs.isFile(filename + '.html')
     ) {
-      let obj = nrl.parse(url)
+      let obj = nrl.parse(req.url)
       if (!obj.pathname.endsWith('/')) {
         obj.pathname = obj.pathname + '/'
         return res.redirect(nrl.format(obj))
       }
 
-      let founded = [
+
+      let nameList = [
         'Readme.md',
         'readme.md',
         'README.md',
@@ -89,19 +90,20 @@ function markdown(options = {}) {
         'README.markdown',
         'README.MARKDOWN',
         'index.md'
-      ]
-        .map(name => nps.join(filename, name))
-        .some(filename => {
-          if (fs.isFile(filename)) {
-            renderMarkdown(res, filename, next, options)
-            return true
-          }
-        })
+      ];
+      const names = fs.readdirSync(filename)
+      const name = names.find(name => nameList.includes(name))
 
-      if (!founded) {
-        next()
+      if (name) {
+        filename = nps.join(filename, name)
+        if (fs.isFile(filename)) {
+          renderMarkdown(res, filename, next, options)
+          return true
+        }
       }
-    } else {
+      next()
+    }
+    else {
       next()
     }
   }
