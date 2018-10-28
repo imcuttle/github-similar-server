@@ -122,6 +122,10 @@ Use [Lodash.template](https://lodash.com/docs/4.17.10#template) with template da
 * markdownHTML
 * filename
 
+## Related
+
+- [remark-preset-gfm](https://github.com/imcuttle/remark-preset-gfm) - Remark preset for gfm (GitHub Favorite Markdown)
+
 ## License
 
 MIT
