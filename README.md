@@ -42,6 +42,12 @@ const gssApp = gss({
 
 ## Options
 
+#### `root`
+
+github-similar-server works on which file or folder. (_required_)
+
+- Type: `string`
+
 #### `port`
 
 the service port
@@ -96,7 +102,6 @@ Extra parameters of template
 
 - Type: `{}`
 
-
 #### `cache`
 
 - Type: `string`
@@ -119,7 +124,7 @@ Because it has some troubles in ecstatic. https://github.com/jfhbrook/node-ecsta
 
 2. The service would response index.html when contains index.html and README.md via url `/`.
 
-3. It would response raw markdown text when with query string `?raw`.
+3. It would response raw markdown text when with query string `?raw=true`.
 
 ## About markdownTemplate
 

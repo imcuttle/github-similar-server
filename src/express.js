@@ -50,6 +50,10 @@ function renderMarkdown(
     .catch(next)
 }
 
+function getName(url) {
+  return decodeURIComponent(nrl.parse(url).pathname.replace(/^\/+/, ''))
+}
+
 function markdown(options = {}) {
   const { root } = options
 
@@ -63,8 +67,8 @@ function markdown(options = {}) {
       return next()
     }
 
-    const url = decodeURIComponent(nrl.parse(req.url).pathname)
-    let filename = nps.join(root, url)
+
+    let filename = nps.join(root, getName(req.url))
     debug('filename', filename)
 
     if (fs.isFile(filename) && ['.md', '.markdown'].includes(nps.extname(filename).toLowerCase())) {
@@ -128,6 +132,16 @@ function githubSimilar(options = {}) {
 // https://github.com/jfhbrook/node-ecstatic/issues/235
 // Wrap ecstatic to solve it temporarily
 function wrapStatic(opts = {}) {
+  if (fs.isFile(opts.root)) {
+    return function (req, res, next) {
+      if (getName(req.url) === '') {
+        return res.sendFile(opts.root)
+      }
+      // skip
+      next()
+    }
+  }
+
   return function(req, res, next) {
     const baseDir = typeof opts.baseDir === 'string' ? opts.baseDir : req.baseUrl
     req.url = req.originalUrl || req.url

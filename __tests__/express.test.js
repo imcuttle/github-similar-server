@@ -18,6 +18,7 @@ describe('main', function() {
   app.use('/case-readme', middleware({ root: makeFixture('case-readme') }))
   app.use('/case-raw', middleware({ root: makeFixture('case-raw') }))
   app.use('/case-zh', middleware({ root: makeFixture('case-zh') }))
+  app.use('/case-single-file', middleware({ root: makeFixture('single-file.md') }))
 
   app.use(
     '/case-template-string',
@@ -134,6 +135,43 @@ describe('main', function() {
       .get(`/case-template-string/${encodeURIComponent('你好 呀')}.md`)
       .expect(function(res) {
         expect(res.text).toEqual('你好 呀 fooo')
+      })
+      .expect(200)
+      .end(done)
+  })
+
+  it('should works on single-file when root is extract file', function (done) {
+    request(app)
+      .get('/case-single-file')
+      .expect(function(res) {
+        expect(res.text).toContain('<p>single</p>\n')
+      })
+      .expect(200)
+      .end(done)
+  })
+
+  it('should works on single-file when root is extract file 2', function (done) {
+    request(app)
+      .get('/case-single-file/')
+      .expect(function(res) {
+        expect(res.text).toContain('<p>single</p>\n')
+      })
+      .expect(200)
+      .end(done)
+  })
+
+  it('should works on single-file when root is extract file (throw error)', function (done) {
+    request(app)
+      .get('/case-single-file/a')
+      .expect(404)
+      .end(done)
+  })
+
+  it('should works on single-file when root is extract file with query `?raw`', function (done) {
+    request(app)
+      .get('/case-single-file?raw=true')
+      .expect(function(res) {
+        expect(res.text).toEqual('single\n')
       })
       .expect(200)
       .end(done)
