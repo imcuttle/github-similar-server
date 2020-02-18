@@ -39,7 +39,8 @@
     "remark-preset-gfm": "^1.0.1",
     "remark-rehype": "^3.0.0",
     "to-vfile": "^4.0.0",
-    "vfile-reporter": "^5.0.0"
+    "vfile-reporter": "^5.0.0",
+    "yaml-front-matter": "^4.1.0"
   },
   "jest": {
     "testMatch": [

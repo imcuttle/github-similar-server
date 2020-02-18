@@ -18,6 +18,7 @@ describe('main', function() {
   app.use('/case-readme', middleware({ root: makeFixture('case-readme') }))
   app.use('/case-raw', middleware({ root: makeFixture('case-raw') }))
   app.use('/case-zh', middleware({ root: makeFixture('case-zh') }))
+  app.use('/case-meta', middleware({ root: makeFixture('case-meta') }))
   app.use('/case-single-file', middleware({ root: makeFixture('single-file.md') }))
 
   app.use(
@@ -35,11 +36,22 @@ describe('main', function() {
   it('should static works when path not found', function(done) {
     request(app)
       .get('/case-1/not_found')
-      // .expect('Content-Type', /json/)
-      // .expect('Content-Length', '15')
       .expect(404)
       .end(function(err, res) {
         if (err) throw err
+        done()
+      })
+  })
+
+  it('should support meta title firstly', function(done) {
+    request(app)
+      .get('/case-meta/')
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw err
+        const dom = new DOMParser().parseFromString(res.text, 'text/html')
+        expect(dom.title).toBe('metaTitle')
+        expect(dom.body.innerHTML).toMatchSnapshot()
         done()
       })
   })

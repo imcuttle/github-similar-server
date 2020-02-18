@@ -11,6 +11,7 @@ const nps = require('path')
 const nrl = require('url')
 const pify = require('pify')
 const template = require('lodash.template')
+const yamlFront = require('yaml-front-matter');
 const debug = require('debug')('github-similar-server:express')
 
 const SpecError = require('./SpecError')
@@ -24,7 +25,7 @@ function renderMarkdown(
   { markdownTemplate = nps.join(__dirname, 'template.html'), markdownTemplateString, templateParameters = {} } = {}
 ) {
   markhtml(filename)
-    .then(function({ output }) {
+    .then(function({ input, output }) {
       if (typeof markdownTemplateString === 'string' && markdownTemplateString) {
         return { output, templateString: markdownTemplateString }
       }
@@ -32,14 +33,18 @@ function renderMarkdown(
         encoding: 'utf8'
       }).then(templateString => ({
         templateString,
-        output
+        output,
+        input
       }))
     })
-    .then(({ templateString, output }) => {
+    .then(({ templateString, input, output }) => {
       res.type('html')
+
+      const meta = yamlFront.loadFront(input);
       res.send(
         template(templateString)(
           Object.assign({}, templateParameters, {
+            meta,
             filename,
             title: nps.basename(filename, nps.extname(filename)),
             markdownHTML: output
