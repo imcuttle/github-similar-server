@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/imcuttle/github-similar-server/compare/v1.2.0...v1.2.1) (2020-02-18)
+
+
+### Features
+
+* support meta ([4ddf159](https://github.com/imcuttle/github-similar-server/commit/4ddf159))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/imcuttle/github-similar-server/compare/v1.1.3...v1.2.0) (2018-10-29)
 
