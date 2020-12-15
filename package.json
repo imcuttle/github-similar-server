@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "debug": "^3.1.0",
-    "ecstatic": "^3.2.0",
+    "ecstatic": "^4.1.4",
     "express": "^4.16.3",
     "lodash.template": "^4.4.0",
     "minimist": "^1.2.0",
